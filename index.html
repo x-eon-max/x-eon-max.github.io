@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>X-EON — Portfolio</title>
+  <meta name="description" content="Portfolio de X-EON : lycéen français, développeur Linux / Python et producteur de musique." />
+  <meta name="theme-color" content="#101417" />
+  <meta property="og:title" content="X-EON — Portfolio" />
+  <meta property="og:description" content="Développeur Linux / Python & producteur de musique." />
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/160015100?v=4" />
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/160015100?s=64&v=4" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wdth,wght@8..144,25..151,100..1000&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main" data-i18n="skip">Aller au contenu</a>
+
+  <!-- ============ TOP APP BAR ============ -->
+  <header class="top-app-bar" id="top">
+    <a class="brand" href="#hero" aria-label="X-EON">
+      <span class="brand-shape" aria-hidden="true"></span>
+      <span class="brand-text">X-EON</span>
+    </a>
+
+    <nav class="nav-rail" aria-label="Navigation">
+      <a href="#about" class="nav-item"><span class="material-symbols-rounded">person</span><span data-i18n="nav.about">À propos</span></a>
+      <a href="#projects" class="nav-item"><span class="material-symbols-rounded">deployed_code</span><span data-i18n="nav.projects">Projets</span></a>
+      <a href="#skills" class="nav-item"><span class="material-symbols-rounded">construction</span><span data-i18n="nav.skills">Compétences</span></a>
+      <a href="#music" class="nav-item"><span class="material-symbols-rounded">graphic_eq</span><span data-i18n="nav.music">Musique</span></a>
+      <a href="#contact" class="nav-item"><span class="material-symbols-rounded">alternate_email</span><span data-i18n="nav.contact">Contact</span></a>
+    </nav>
+
+    <div class="bar-actions">
+      <button class="icon-btn" id="term-toggle" aria-label="Terminal CLI" title="Terminal (Ctrl+K)">
+        <span class="material-symbols-rounded">terminal</span>
+      </button>
+      <button class="icon-btn" id="lang-toggle" aria-label="Changer de langue" title="FR / EN">
+        <span class="lang-label">EN</span>
+      </button>
+      <button class="icon-btn" id="palette-toggle" aria-label="Couleur du thème" aria-expanded="false" aria-controls="palette-sheet">
+        <span class="material-symbols-rounded">palette</span>
+      </button>
+      <button class="icon-btn" id="theme-toggle" aria-label="Thème clair / sombre">
+        <span class="material-symbols-rounded" id="theme-icon">light_mode</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ PALETTE SHEET (dynamic color) ============ -->
+  <div class="palette-sheet" id="palette-sheet" role="dialog" aria-label="Palette" hidden>
+    <p class="label-large" data-i18n="palette.title">Couleur source (Dynamic Color)</p>
+    <div class="swatches" id="swatches"></div>
+    <label class="custom-color">
+      <span class="material-symbols-rounded">colorize</span>
+      <span data-i18n="palette.custom">Personnalisée</span>
+      <input type="color" id="custom-color" value="#1793d1" />
+    </label>
+  </div>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-text">
+        <span class="assist-chip reveal">
+          <span class="dot"></span><span data-i18n="hero.chip">Disponible pour des projets open source</span>
+        </span>
+        <h1 class="display-hero reveal" id="hero-title" aria-label="X-EON">
+          <span class="hero-letter">X</span><span class="hero-letter">-</span><span class="hero-letter">E</span><span class="hero-letter">O</span><span class="hero-letter">N</span>
+        </h1>
+        <p class="headline reveal" data-i18n-html="hero.tagline">Lycéen 🇫🇷 qui code <em>au plus près du matériel</em> sous Linux — et qui fait de la musique.</p>
+
+        <div class="button-group reveal" role="group">
+          <a class="btn btn-filled btn-lg" href="#projects">
+            <span class="material-symbols-rounded">rocket_launch</span><span data-i18n="hero.cta1">Voir les projets</span>
+          </a>
+          <a class="btn btn-tonal btn-lg" href="https://github.com/x-eon-max" target="_blank" rel="noopener">
+            <span class="material-symbols-rounded">code</span>GitHub
+          </a>
+        </div>
+
+        <div class="stat-row reveal" id="stats">
+          <div class="stat"><span class="stat-value" id="stat-repos">17</span><span class="stat-label" data-i18n="stats.repos">dépôts publics</span></div>
+          <div class="stat"><span class="stat-value" id="stat-stars">—</span><span class="stat-label" data-i18n="stats.stars">étoiles</span></div>
+          <div class="stat"><span class="stat-value" id="stat-followers">—</span><span class="stat-label" data-i18n="stats.followers">followers</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual reveal" aria-hidden="true">
+        <div class="orbit orbit-1"></div>
+        <div class="orbit orbit-2"></div>
+        <button class="avatar-morph" id="avatar" tabindex="-1" title="Click me">
+          <svg viewBox="0 0 1 1" preserveAspectRatio="xMidYMid meet">
+            <defs>
+              <clipPath id="avatar-clip">
+                <path id="avatar-clip-path" d="M0.5 0A0.5 0.5 0 1 1 0.5 1A0.5 0.5 0 1 1 0.5 0Z" />
+              </clipPath>
+            </defs>
+            <g clip-path="url(#avatar-clip)">
+              <rect width="1" height="1" class="avatar-bg" />
+              <image href="https://avatars.githubusercontent.com/u/160015100?s=480&v=4" width="1" height="1" preserveAspectRatio="xMidYMid slice" />
+            </g>
+          </svg>
+        </button>
+        <span class="floating-shape fs-1"></span>
+        <span class="floating-shape fs-2"></span>
+        <span class="floating-shape fs-3"></span>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section" id="about">
+      <header class="section-head reveal">
+        <span class="section-index">01</span>
+        <h2 class="display-medium" data-i18n="about.title">À propos</h2>
+      </header>
+
+      <div class="bento">
+        <article class="card card-primary bento-wide reveal">
+          <span class="material-symbols-rounded card-icon">waving_hand</span>
+          <h3 class="headline-small" data-i18n="about.hello">Salut, moi c'est X-EON.</h3>
+          <p data-i18n="about.p1">Je suis un lycéen français passionné d'informatique et de musique. J'aime comprendre comment les choses marchent sous le capot : les drivers, les protocoles, le noyau Linux… puis en faire des outils simples et agréables à utiliser.</p>
+        </article>
+
+        <article class="card card-tertiary reveal">
+          <span class="material-symbols-rounded card-icon">terminal</span>
+          <h3 class="title-large" data-i18n="about.linux.t">Linux d'abord</h3>
+          <p data-i18n="about.linux.p">Arch Linux au quotidien. Scripts, services systemd, udev, hidraw : j'automatise tout ce qui peut l'être.</p>
+        </article>
+
+        <article class="card card-secondary reveal">
+          <span class="material-symbols-rounded card-icon">bolt</span>
+          <h3 class="title-large" data-i18n="about.perf.t">Obsédé par la perf</h3>
+          <p data-i18n="about.perf.p">Écritures directes sur descripteurs, NumPy vectorisé, zéro boucle inutile : un outil doit être léger.</p>
+        </article>
+
+        <article class="card card-surface bento-wide reveal">
+          <span class="material-symbols-rounded card-icon">school</span>
+          <h3 class="title-large" data-i18n="about.learn.t">Toujours en train d'apprendre</h3>
+          <p data-i18n="about.learn.p">Ouvert à la collaboration et aux échanges avec ceux qui partagent les mêmes centres d'intérêt. N'hésite pas à ouvrir une issue ou une PR sur mes dépôts !</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section" id="projects">
+      <header class="section-head reveal">
+        <span class="section-index">02</span>
+        <h2 class="display-medium" data-i18n="projects.title">Projets</h2>
+      </header>
+
+      <div class="chip-set reveal" role="toolbar" aria-label="Filtres" id="filters">
+        <button class="filter-chip selected" data-filter="all"><span class="material-symbols-rounded check">check</span><span data-i18n="filter.all">Tous</span></button>
+        <button class="filter-chip" data-filter="linux"><span class="material-symbols-rounded check">check</span>Linux</button>
+        <button class="filter-chip" data-filter="python"><span class="material-symbols-rounded check">check</span>Python</button>
+        <button class="filter-chip" data-filter="windows"><span class="material-symbols-rounded check">check</span>Windows</button>
+        <button class="filter-chip" data-filter="web"><span class="material-symbols-rounded check">check</span>Web</button>
+      </div>
+
+      <div class="projects-grid" id="projects-grid">
+        <!-- Rendered by main.js -->
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section class="section" id="skills">
+      <header class="section-head reveal">
+        <span class="section-index">03</span>
+        <h2 class="display-medium" data-i18n="skills.title">Compétences</h2>
+      </header>
+
+      <div class="skills-layout">
+        <div class="skill-group card card-surface reveal">
+          <h3 class="title-large"><span class="material-symbols-rounded">code_blocks</span><span data-i18n="skills.lang">Langages</span></h3>
+          <div class="shape-chips">
+            <span class="shape-chip s-cookie">Python</span>
+            <span class="shape-chip s-pill">C</span>
+            <span class="shape-chip s-clover">Bash</span>
+            <span class="shape-chip s-pill">TypeScript</span>
+            <span class="shape-chip s-cookie">JavaScript</span>
+            <span class="shape-chip s-pill">HTML / CSS</span>
+            <span class="shape-chip s-clover">Batch</span>
+          </div>
+        </div>
+        <div class="skill-group card card-surface reveal">
+          <h3 class="title-large"><span class="material-symbols-rounded">memory</span><span data-i18n="skills.sys">Système & matériel</span></h3>
+          <div class="shape-chips">
+            <span class="shape-chip s-pill">Arch Linux</span>
+            <span class="shape-chip s-cookie">systemd</span>
+            <span class="shape-chip s-pill">udev / hidraw</span>
+            <span class="shape-chip s-clover">D-Bus</span>
+            <span class="shape-chip s-pill">pacman / AUR</span>
+            <span class="shape-chip s-cookie">Windows 11</span>
+          </div>
+        </div>
+        <div class="skill-group card card-surface reveal">
+          <h3 class="title-large"><span class="material-symbols-rounded">widgets</span><span data-i18n="skills.libs">Frameworks & outils</span></h3>
+          <div class="shape-chips">
+            <span class="shape-chip s-cookie">PyQt6</span>
+            <span class="shape-chip s-pill">NumPy</span>
+            <span class="shape-chip s-clover">Pygame</span>
+            <span class="shape-chip s-pill">Discord RPC</span>
+            <span class="shape-chip s-cookie">Node.js</span>
+            <span class="shape-chip s-pill">Git / gh</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ MUSIC ============ -->
+    <section class="section" id="music">
+      <header class="section-head reveal">
+        <span class="section-index">04</span>
+        <h2 class="display-medium" data-i18n="music.title">Musique</h2>
+      </header>
+
+      <article class="music-card reveal">
+        <div class="eq" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="music-text">
+          <h3 class="headline-medium" data-i18n="music.h">Quand je ne code pas, je produis.</h3>
+          <p data-i18n="music.p">La création musicale est ma façon préférée de décompresser. Le même goût pour le détail et l'expérimentation que dans le code — mais avec des synthés.</p>
+          <div class="music-actions">
+            <button class="synth-btn" id="synth-toggle">
+              <span class="material-symbols-rounded" id="synth-icon">play_arrow</span>
+              <span id="synth-label" data-i18n="music.synth">Jouer une nappe synthé</span>
+            </button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section" id="contact">
+      <div class="contact-card reveal">
+        <span class="contact-shape" aria-hidden="true"></span>
+        <h2 class="display-large" data-i18n="contact.title">On construit quelque chose&nbsp;?</h2>
+        <p class="body-large" data-i18n="contact.p">Le meilleur moyen de me joindre, c'est GitHub : issues, pull requests ou discussions sur mes projets.</p>
+        <div class="button-group">
+          <a class="btn btn-filled btn-xl" href="https://github.com/x-eon-max" target="_blank" rel="noopener">
+            <span class="material-symbols-rounded">open_in_new</span>github.com/x-eon-max
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OTHER PAGES ============ -->
+    <section class="section section-tight" id="pages">
+      <header class="section-head reveal">
+        <span class="section-index">05</span>
+        <h2 class="headline-large" data-i18n="pages.title">Autres pages du site</h2>
+      </header>
+      <div class="list reveal">
+        <a class="list-item" href="inferno_compilation_guide.html">
+          <span class="material-symbols-rounded leading">menu_book</span>
+          <span class="list-text"><span class="title-medium">Inferno Project — Compilation Guide</span><span class="body-medium" data-i18n="pages.inferno">Guide technique pour compiler et booter Inferno sur Android</span></span>
+          <span class="material-symbols-rounded trailing">arrow_forward</span>
+        </a>
+        <a class="list-item" href="dist/index.html">
+          <span class="material-symbols-rounded leading">school</span>
+          <span class="list-text"><span class="title-medium">STI2D SIN</span><span class="body-medium" data-i18n="pages.sti2d">Découvrir la spécialité STI2D SIN au lycée</span></span>
+          <span class="material-symbols-rounded trailing">arrow_forward</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year">2026</span> X-EON · <span data-i18n="footer">Conçu en Material 3 Expressive, codé à la main.</span></p>
+  </footer>
+
+  <!-- FAB -->
+  <a class="fab" href="#hero" id="fab" aria-label="Retour en haut">
+    <span class="material-symbols-rounded">arrow_upward</span>
+  </a>
+
+  <!-- ============ TERMINAL DRAWER (CLI Mode) ============ -->
+  <div class="terminal-scrim" id="terminal-scrim" hidden>
+    <div class="terminal-box" role="dialog" aria-label="Terminal">
+      <div class="terminal-header">
+        <span class="term-dot red"></span>
+        <span class="term-dot yellow"></span>
+        <span class="term-dot green"></span>
+        <span class="term-title">x-eon@archlinux:~ (zsh)</span>
+        <button class="term-close" id="term-close" aria-label="Fermer"><span class="material-symbols-rounded">close</span></button>
+      </div>
+      <div class="terminal-body" id="term-body">
+        <div class="term-output" id="term-output">Bienvenue sur le terminal de <span class="prompt">X-EON</span> !
+Tapez <span class="highlight">help</span> pour voir les commandes disponibles.</div>
+        <form class="term-input-row" id="term-form" autocomplete="off">
+          <span class="prompt">guest@x-eon:~$</span>
+          <input type="text" class="term-input" id="term-input" spellcheck="false" />
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
