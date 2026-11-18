@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Assistant de paiement Google One $0.00 · banxian (mise à jour 12 mois)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      width: 370px;
+      background: linear-gradient(160deg, #0f172a 0%, #1e293b 100%);
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+      padding: 14px;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      margin-bottom: 10px;
+    }
+    .title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 99px;
+      background: rgba(16, 185, 129, 0.2);
+      color: #6ee7b7;
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status {
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(59, 130, 246, 0.16);
+      border: 1px solid rgba(96, 165, 250, 0.38);
+      color: #dbeafe;
+      font-size: 12px;
+      line-height: 1.45;
+      margin-bottom: 10px;
+    }
+    .preset-list {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      max-height: 360px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+    .preset-btn {
+      width: 100%;
+      text-align: left;
+      padding: 9px 11px;
+      border-radius: 9px;
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      background: rgba(30, 41, 59, 0.9);
+      color: #f1f5f9;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .preset-btn:hover {
+      border-color: #60a5fa;
+      background: rgba(37, 99, 235, 0.22);
+    }
+    .preset-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 12.5px;
+      color: #93c5fd;
+    }
+    .preset-tag {
+      font-size: 10.5px;
+      padding: 1px 6px;
+      border-radius: 99px;
+      background: rgba(37, 99, 235, 0.35);
+      color: #bfdbfe;
+      white-space: nowrap;
+    }
+    .preset-sub {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 3px;
+    }
+    .yt-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: #cbd5e1;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 9px;
+    }
+    .yt-row input {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      accent-color: #2563eb;
+      cursor: pointer;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+    .util-btn {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 7px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: rgba(51, 65, 85, 0.85);
+      color: #f8fafc;
+      font-size: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .util-btn:hover {
+      background: rgba(71, 85, 105, 0.95);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="title">⚡ Assistant de paiement Google One $0.00</div>
+    <span class="badge">banxian (12 mois)</span>
+  </div>
+
+  <div id="popup-status" class="status">
+    Cliquez sur une offre 1 mois (30 To / 20 To) ci-dessous pour ouvrir automatiquement la fenêtre de paiement à <b>US$0.00</b> (ouverture uniquement, sans débit automatique).
+  </div>
+
+  <label class="yt-row">
+    <input type="checkbox" id="popup-include-yt" />
+    Inclure YouTube Premium (1 mois gratuit)
+  </label>
+
+  <div id="preset-container" class="preset-list"></div>
+
+  <div class="footer-row">
+    <button id="popup-us-btn" class="util-btn" title="Ouvrir les paramètres Google Pay ou remplir automatiquement une adresse en Oregon (État américain sans taxe)">🇺🇸 Coordonnées US sans taxe (OR 97201)</button>
+  </div>
+
+  <script src="presets.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

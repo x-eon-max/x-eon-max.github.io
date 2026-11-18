@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Google One $0.00 付款助手 · banxian 更新版（12个月）",
+  "version": "1.2.1",
+  "description": "banxian 更新版：Ultra 5x 12个月 $0 试用一键结账（带 YouTube 附加项）。只打开付款页，不自动扣款。",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://one.google.com/*",
+    "https://payments.google.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "一键打开 Google One $0.00 付款页面 (1个月油管版)",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://one.google.com/*",
+        "https://payments.google.com/*"
+      ],
+      "js": [
+        "presets.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
